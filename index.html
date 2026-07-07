@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="@yourhandle">
+  <title>stackz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Reveal screen (click to enter) -->
+  <div class="reveal-screen" id="revealScreen">
+    <span>click</span>
+  </div>
+
+  <canvas id="particles"></canvas>
+  <div class="overlay vignette"></div>
+  <div class="overlay grain"></div>
+  <div class="overlay scanlines"></div>
+
+  <main class="profile" id="profile">
+
+    <div class="profile-header" id="profileHeader">
+      <div class="dc-card">
+        <div class="dc-avatar-section">
+          <div class="dc-avatar-wrap">
+            <img src="05ea87710d57a2018662052b9e4572fa.jpg" alt="" class="dc-avatar" id="dcAvatar">
+            <span class="dc-status-ring" id="dcStatusRing"></span>
+          </div>
+        </div>
+        <div class="dc-body">
+          <div class="dc-name-row">
+            <h1 class="dc-display-name" id="dcDisplayName">YourName</h1>
+            <span class="verified-badge" title="Verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+          </div>
+          <div class="typewriter" id="typewriter">
+            <span class="typewriter-text" id="typewriterText"></span>
+            <span class="typewriter-cursor">|</span>
+          </div>
+          <span class="dc-status" id="dcStatus">
+            <span class="dc-status-dot"></span>
+            <span class="dc-status-text">online</span>
+          </span>
+          <div class="dc-bio" id="dcBio"></div>
+          <div class="badges" id="badges"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="platform-links" id="platformLinks"></div>
+
+    <!-- Views counter -->
+  <div class="views-box">
+    <span class="views-inner">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
+      <span class="views-count" id="viewCount">0</span>
+      <span class="views-tooltip">Profile Views</span>
+    </span>
+  </div>
+
+    <!-- Music player -->
+    <div class="section-label"></div>
+    <div class="music-player" id="musicPlayer">
+      <audio id="audioEl" preload="metadata" loop></audio>
+      <div class="now-playing">
+        <div class="track-info">
+          <div class="track-cover">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <div class="track-meta">
+            <div class="track-label">Now Playing</div>
+            <div class="track-name" id="trackName">6locc</div>
+            <div class="track-artist" id="trackArtist">unknown</div>
+          </div>
+        </div>
+        <button class="play-btn" id="playBtn" aria-label="Play">
+          <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+      </div>
+      <div class="waveform" id="waveform"></div>
+      <div class="progress-wrap">
+        <span class="time" id="timeCurrent">0:00</span>
+        <div class="progress" id="barTrack"><div class="progress-fill" id="barFill"></div></div>
+        <span class="time" id="timeTotal">0:00</span>
+      </div>
+      <div class="volume-wrap">
+        <svg class="volume-icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>tilde for console</p>
+    </footer>
+  </main>
+
+  <!-- Terminal -->
+  <div class="float-window" id="termWindow" aria-hidden="true">
+    <div class="float-header" id="termHeader">
+      <div class="float-dots"><span></span><span></span><span></span></div>
+      <div class="float-title">stackzOS</div>
+      <div class="float-spacer"></div>
+      <button class="float-close" id="termClose" aria-label="Close terminal">x</button>
+    </div>
+    <div class="term-body" id="termBody"></div>
+    <div class="term-input-line">
+      <span class="term-prompt">stackup:~$</span>
+      <input type="text" id="termInput" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
